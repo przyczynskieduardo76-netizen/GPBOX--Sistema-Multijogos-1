@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPBOX - Reviva os Clássicos!</title>
+    <style>
+        /* Reset e fontes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        /* Header com imagem */
+        header {
+            position: relative;
+            height: 400px;
+            background-image: url('https://s10.aconvert.com/convert/p3r68-cdx67/ah6js-76p19.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .header-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 20px;
+            border-radius: 15px;
+        }
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.5em;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .product-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .product-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-image {
+            flex: 1 1 400px;
+        }
+        .product-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        .product-image img:hover {
+            transform: scale(1.05);
+        }
+        .product-details {
+            flex: 1 1 400px;
+        }
+        .product-details h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .product-details p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .features {
+            margin-top: 30px;
+        }
+        .features li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        /* Botão de compra com brilho pulsante */
+        .buy-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            color: #fff;
+            background-color: #ff4c4c;
+            text-decoration: none;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 76, 76, 0.6);
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .buy-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .buy-button:hover::after {
+            left: 100%;
+        }
+        .buy-button:hover {
+            background-color: #e04343;
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px rgba(255, 76, 76, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(255, 76, 76, 1); }
+            100% { box-shadow: 0 0 10px rgba(255, 76, 76, 0.6); }
+        }
+
+        /* Galeria de jogos com fundo cinza escuro animado */
+        .gallery {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(120deg, #1a1a1a, #2b2b2b, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientAnimationGallery 15s ease infinite;
+            border-radius: 15px;
+        }
+        @keyframes gradientAnimationGallery {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .gallery h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        .gallery-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .gallery-images img {
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .gallery-images img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: rgba(0,0,0,0.6);
+            margin-top: 50px;
+        }
+
+        @media(max-width: 900px) {
+            .product-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-image, .product-details {
+                flex: 1 1 100%;
+            }
+        }
+        @media(max-width: 768px) {
+            header {
+                height: 300px;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            header p {
+                font-size: 1.2em;
+            }
+            .product-details {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-overlay">
+        <h1>GPBOX</h1>
+        <p>Reviva os grandes clássicos da sua infância! 🕹️</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="product-section">
+        <div class="product-image">
+            <img src="https://s10.aconvert.com/convert/p3r68-cdx67/aiu7a-ojf8t.png" alt="GPBOX - Jogos Clássicos">
+        </div>
+        <div class="product-details">
+            <h2>Mais de 7.000 jogos em um só lugar! 🎮</h2>
+            <p>
+                Experimente a nostalgia dos maiores clássicos! Com o GPBOX, você poderá jogar títulos de consoles lendários diretamente do seu computador ou notebook.  
+                São milhares de jogos dos melhores consoles de todos os tempos, com emuladores integrados em um único sistema.
+            </p>
+            <ul class="features">
+                <li>✅ Mais de 7.000 jogos disponíveis</li>
+                <li>✅ Emuladores completos e fáceis de usar</li>
+                <li>✅ Jogos como Mário, Donkey Kong, Bomberman, Mortal Kombat e muito mais</li>
+                <li>✅ Reviva a diversão da sua infância!</li>
+            </ul>
+            <a class="buy-button" href="https://pay.kiwify.com.br/iLDn5K5?afid=khQS26NH" target="_blank">Garanta já o seu!</a>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <h3>Alguns dos clássicos que você vai jogar! 🎮</h3>
+        <div class="gallery-images">
+            <img src="https://s10.aconvert.com/convert/p3r68-cdx67/ajo0y-k63oc.png"Mário">
+            <img src="https://s10.aconvert.com/convert/p3r68-cdx67/as4kn-0lcxi.png" alt="Donkey Kong">
+            <img src="https://s10.aconvert.com/convert/p3r68-cdx67/a63q6-uhtrx.png" alt="Mortal Kombat">
+            <img src="https://s10.aconvert.com/convert/p3r68-cdx67/ajmsb-4wgdx.png" alt="Bomberman">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 GPBOX. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Efeito de fade-in na galeria
+    const images = document.querySelectorAll('.gallery-images img');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {threshold: 0.1});
+    images.forEach(img => observer.observe(img));
+
+    // Efeito de entrada (fade + slide) no bloco do produto
+    const productSection = document.querySelector('.product-section');
+    const observerProduct = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+    observerProduct.observe(productSection);
+</script>
+
+</body>
+</html>
